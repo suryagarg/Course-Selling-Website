@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-console.log("connected")
-mongoose.connect("mongodb+srv://suryashukla:ybvbrSxs5KF91wl2@suryanamastenode.dv96i.mongodb.net/course-website-db")
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
 

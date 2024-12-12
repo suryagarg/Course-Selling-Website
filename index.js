@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
 const { userRouter } = require("./routes/user");
 const { courseRouter } = require("./routes/course");
@@ -9,4 +10,10 @@ app.use("/user", userRouter);
 app.use("/course", courseRouter);
 app.use("/admin", adminRouter);
 
-app.listen(3000);
+async function main(){
+    await mongoose.connect("mongodb+srv://suryashukla:ybvbrSxs5KF91wl2@suryanamastenode.dv96i.mongodb.net/course-website-db")
+    app.listen(3000);
+    console.log("Connected")
+}
+
+main();
