@@ -21,4 +21,4 @@ const { userRouter } = require("./routes/user");
 const { courseRouter } = require("./routes/course")
 
 app.use("/user", userRouter);
-app.use("cours", courseRouter);
+app.use("/course", courseRouter);

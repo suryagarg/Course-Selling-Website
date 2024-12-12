@@ -5,17 +5,17 @@ const {Router} = require("express");
 
 const courseRouter = Router();
 
-courseRouter.get("/purchase", function(req, res){
-    
+courseRouter.post("/purchase", function(req, res){
+    //Router to buy course
 })
 
-courseRouter.post("/purchasedCourse", function(req, res){
-    
+courseRouter.get("/purchasedCourse", function(req, res){
+    //preview of Already Purchased Course
 })
 
 
-courseRouter.post("/preview", function(req, res){
-    
+courseRouter.get("/preview", function(req, res){
+    //Preview the all course and decide to buy or not
 })
 
 module.exports = {
