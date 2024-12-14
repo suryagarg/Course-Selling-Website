@@ -2,9 +2,11 @@
 // const router = express.Router;    
 
 const { Router } = require("express"); //other way of doing above
-const { userModel } = require("../db")
+const { userModel, purchaseModel } = require("../db")
 const userRouter = Router();
 const jwt = require("jsonwebtoken");
+const {courseRouter} = require("./course");
+const userMidddleware = require("../Middlewares/userMiddleware");
 const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD;
 userRouter.post("/signup", async function(req, res){
     const {email, password, firstName, lastName} = req.body;
@@ -42,8 +44,15 @@ userRouter.post("/login", async function(req, res){
     }
 })
 
-userRouter.get("/purchasedCourse", function(req, res){
+userRouter.get("/purchasedCourse",userMidddleware, async function(req, res){
     //preview of Already Purchased Course
+    const userId = req.userId;
+    const purchase = await purchaseModel.find({
+        userId,
+    });
+    res.json({
+        purchase
+    })
 })
 
 module.exports = {

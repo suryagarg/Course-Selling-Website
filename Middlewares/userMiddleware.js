@@ -4,7 +4,7 @@ const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD;
 function userMiddleware(req, res, next){
    try{
            const token = req.headers.token;
-           const decode = jwt.verify(token, JWT_ADMIN_PASSWORD)
+           const decode = jwt.verify(token, JWT_USER_PASSWORD)
        
            if(decode){
                req.userId = decode.id;
@@ -22,6 +22,4 @@ function userMiddleware(req, res, next){
         }
 }
 
-module.exports = {
-    userMiddleware: userMiddleware
-}
+module.exports = userMiddleware;
