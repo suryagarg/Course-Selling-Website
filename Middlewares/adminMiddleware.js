@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD;
 
 function adminMiddleware(req, res, next){
-     const token = req.headers.token;
+     try{
+        const token = req.headers.token;
         const decode = jwt.verify(token, JWT_ADMIN_PASSWORD)
     
         if(decode){
@@ -13,6 +14,12 @@ function adminMiddleware(req, res, next){
                 message: "You are not signed in"
             })
         }
+     }catch(error){
+        console.log("Error Generated", error.message)
+        res.status(404).json({
+            message: "invalid token"
+        })
+     }
 }
 
 module.exports = adminMiddleware;
