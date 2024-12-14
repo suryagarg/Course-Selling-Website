@@ -47,11 +47,21 @@ userRouter.post("/login", async function(req, res){
 userRouter.get("/purchasedCourse",userMidddleware, async function(req, res){
     //preview of Already Purchased Course
     const userId = req.userId;
-    const purchase = await purchaseModel.find({
+    const purchasedCourse = await purchaseModel.find({
         userId,
     });
+    let purchasedCourseId = [];
+    
+    for(let i=0; i<purchasedCourse.length; i++){
+        purchasedCourseId.push(purchasedCourse[i].courseId)
+    }
+    const courseData = await purchaseModel.find({
+        _id: { $in: purchasedCourseId }
+    })
+
     res.json({
-        purchase
+        purchasedCourse,
+        courseData
     })
 })
 
