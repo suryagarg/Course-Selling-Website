@@ -2,7 +2,7 @@
 // const router = express.Router;    
 
 const { Router } = require("express"); //other way of doing above
-const { userModel, purchaseModel } = require("../db")
+const { userModel, purchaseModel, courseModel } = require("../db")
 const userRouter = Router();
 const jwt = require("jsonwebtoken");
 const {courseRouter} = require("./course");
@@ -55,7 +55,7 @@ userRouter.get("/purchasedCourse",userMidddleware, async function(req, res){
     for(let i=0; i<purchasedCourse.length; i++){
         purchasedCourseId.push(purchasedCourse[i].courseId)
     }
-    const courseData = await purchaseModel.find({
+    const courseData = await courseModel.find({
         _id: { $in: purchasedCourseId }
     })
 
